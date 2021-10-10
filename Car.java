@@ -21,8 +21,18 @@ public class Car {
         String model = sc.nextLine();
         System.out.print("MPG: ");
         double mpg = sc.nextDouble();
+        if (mpg < 0) { 
+
+System.out.println("mpg cannot be negative, setting to default value 25");
+mpg = 25;  
+        }
         System.out.print("Gas Tank Capacity: ");
         double gasTankCapacity = sc.nextDouble();
+      if (gasTankCapacity < 0) { 
+
+System.out.println("gasTankCapacity cannot be negative, setting to default value 12");
+gasTankCapacity = 25;  
+        }
         Car car = new Car(model, mpg, gasTankCapacity);
 
         // Refuel the car to its maximum gas capacity
@@ -53,12 +63,19 @@ public class Car {
     public void drive(double distance) {
         // drive for distance (in miles), and update gas tank level accordingly (using mpg)
         currentGasAmount -= distance / mpg;
+        if (currentGasAmount < gasTankCapacity ) { 
+System.out.println("The car ran out of gas after driving " + distance + " miles."); 
+        }
     }
 
     public void refuel(double gasAmount) {
         // Add gasAmount of gas to the gas tank
         currentGasAmount += gasAmount;
+        if (gasAmount > gasTankCapacity) { 
+System.out.println("The gas tank ran out of space, only " + (gasAmount - gasTankCapacity) + " gallons of gas were added"); 
+        }
     }
+    
 
     public double getGasRemaining() {
         // Return the number of gallons of gas currently in the gas tank
